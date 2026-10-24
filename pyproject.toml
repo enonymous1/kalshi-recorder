@@ -1,0 +1,28 @@
+[project]
+name = "kalshi-recorder"
+version = "1.0.0"
+description = "Standalone Kalshi market data recorder (books + trades to Parquet)"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp>=3.9",
+    "polars>=1.0",
+    "websockets>=12",
+    "cryptography>=42",
+    "orjson>=3.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.4",
+]
+
+[project.scripts]
+kalshi-record = "data.recorder:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100

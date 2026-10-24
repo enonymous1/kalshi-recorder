@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.kalshi-recorder</string>
+    <!-- NOTE: this execs the venv python directly with no bash wrapper.
+         Every binary a LaunchAgent touches on a removable volume needs its own
+         TCC approval ("would like to access files on the removable volume"),
+         and /bin/bash never got one — the wrapper-script version died with
+         exit 126. The venv python was approved via the usual pop-up, so it
+         runs directly. (Seen 2026-10-13.) -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/path/to/kalshi-recorder/.venv/bin/python</string>
+        <string>-u</string>
+        <string>/path/to/kalshi-recorder/data/recorder.py</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <!-- Don't hot-loop if it crashes instantly -->
+    <key>ThrottleInterval</key>
+    <integer>60</integer>
+    <key>WorkingDirectory</key>
+    <string>/path/to/kalshi-recorder</string>
+    <!-- NOTE: stdio must stay under $HOME. Pointing it at the external volume
+         makes the spawn fail (exit 78, EX_CONFIG) with no log ever written —
+         the spawn daemon can't obtain volume access. -->
+    <key>StandardOutPath</key>
+    <string>/Users/justinlyons/Library/Logs/kalshi-recorder.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/justinlyons/Library/Logs/kalshi-recorder.log</string>
+</dict>
+</plist>
