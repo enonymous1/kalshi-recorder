@@ -69,7 +69,7 @@ def sign_request(key_id: str, private_key_pem: bytes, method: str, path: str) ->
     ``{timestamp_ms}{METHOD}{path}`` (path WITHOUT query string).
     Returns (key_id, timestamp_ms, base64_signature).
     """
-    from cryptography.hazmat.primitives import hashes, serialization
+    from cryptography.hazmat.primitives import hashes
     from cryptography.hazmat.primitives.asymmetric import ed25519, padding, rsa
 
     key = load_private_key(private_key_pem)

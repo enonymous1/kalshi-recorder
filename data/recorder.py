@@ -25,13 +25,16 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config.settings import SETTINGS, Settings
 from core.loop import install_loop
 from data.auth import sign_request, ws_headers_kwarg
-from data.networking import TokenBucket, backoff_delay, sleep_or_stop
-from data.schemas import (
-    BOOK_SCHEMA, TRADE_SCHEMA, derive_book_row, trade_row,
-)
-from data.watermark import Watermark
 from data.kalshi import KalshiREST, KalshiThrottleTimeout
+from data.networking import TokenBucket, backoff_delay
+from data.schemas import (
+    BOOK_SCHEMA,
+    TRADE_SCHEMA,
+    derive_book_row,
+    trade_row,
+)
 from data.universe import UniverseCache, select_series, select_universe
+from data.watermark import Watermark
 
 LOG = logging.getLogger("recorder")
 
